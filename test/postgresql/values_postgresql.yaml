@@ -1,0 +1,74 @@
+## @section Global parameters
+## Please, note that this will override the parameters, including dependencies, configured to use the global value
+##
+global:
+  postgres: 
+    auth:
+      postgresPassword: "admin"
+      username: "admin"
+      password: "admin"
+      database: "mydb"
+      existingSecret: ""
+    ## @param global.postgresql.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
+    ##
+    service:
+      ports:
+        postgresql: ""
+
+
+auth:
+  ## @param auth.enablePostgresUser Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
+  ##
+  enablePostgresUser: true
+  ## @param auth.postgresPassword Password for the "postgres" admin user
+  ##
+  postgresPassword: ""
+  ## @param auth.username Name for a custom user to create
+  ##
+  username: ""
+  ## @param auth.password Password for the custom user to create
+  ##
+  password: ""
+  ## @param auth.database Name for a custom database to create
+  ##
+  database: "userdb"
+  ## @param auth.replicationUsername Name of the replication user
+  ##
+  replicationUsername: repl_user
+  ## @param auth.replicationPassword Password for the replication user
+  ##
+  replicationPassword: ""
+  ## @param auth.existingSecret Name of existing secret to use for PostgreSQL credentials
+ 
+##
+containerPorts:
+  postgresql: 5432
+
+
+  ##
+  service:
+    ## @param primary.service.type Kubernetes Service type
+    ##
+    type: ClusterIP
+    ## @param primary.service.ports.postgresql PostgreSQL service port
+    ##
+    ports:
+      postgresql: 5432
+    ## Node ports to expose
+    ## NOTE: choose port between <30000-32767>
+    ## @param primary.service.nodePorts.postgresql Node port for PostgreSQL
+    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+    ##
+    nodePorts:
+      postgresql: ""
+    ## @param primary.service.clusterIP Static clusterIP or None for headless services
+ 
+  service:
+    ## @param readReplicas.service.type Kubernetes Service type
+    ##
+    type: ClusterIP
+    ## @param readReplicas.service.ports.postgresql PostgreSQL service port
+    ##
+    ports:
+      postgresql: 5432
+    

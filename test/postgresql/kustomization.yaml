@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: yvtokan-test
+
+helmCharts:
+  - name: postgresql
+    releaseName: yvtokan-test
+    version: 11.0.8
+    repo: https://charts.bitnami.com/bitnami
+    valuesFile: ./values_postgresql.yaml
+
+secretGenerator:
+- name: yvtokan-test-postgresql
+  literals:
+  - username=admin1
+  - password=admin1
+  - postgres-password=admin1

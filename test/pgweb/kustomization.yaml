@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: yvtokan-test
+helmCharts:
+  - name: pgweb
+    releaseName: yvtokan-test
+    version: 0.0.8
+    repo: https://slamdev.github.io/helm-charts
+    valuesFile: ./values_pgweb.yaml
+
+patches:
+- path: patch.yaml
+ 
+  target:
+    kind: Deployment 

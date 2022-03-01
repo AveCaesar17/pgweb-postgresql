@@ -1,0 +1,2 @@
+kubectl kustomize test --enable-helm | kubectl apply -f -
+
